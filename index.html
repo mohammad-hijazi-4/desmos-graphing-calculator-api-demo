@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="A keyless GitHub demo showing how to load the Desmos Graphing Calculator API at runtime." />
+  <title>Desmos Graphing Calculator API Demo</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="page-shell">
+    <header class="hero">
+      <p class="eyebrow">Desmos API Demo</p>
+      <h1>Interactive Graphing Calculator</h1>
+      <p class="intro">
+        This repository does not contain an API key. Enter your own Desmos API key
+        locally in the browser to run the demo.
+      </p>
+    </header>
+
+    <section id="keyPanel" class="key-card">
+      <h2>Enter API key locally</h2>
+      <p>
+        Your key is not stored in this repository or sent to this demo server.
+        It is used only by your browser to load the Desmos API.
+      </p>
+
+      <div class="key-row">
+        <input
+          id="apiKeyInput"
+          type="password"
+          autocomplete="off"
+          placeholder="Paste your Desmos API key"
+          aria-label="Desmos API key"
+        />
+        <button id="loadBtn" class="primary">Load calculator</button>
+      </div>
+    </section>
+
+    <section id="calculatorCard" class="calculator-card hidden">
+      <div class="toolbar">
+        <span class="toolbar-label">Examples:</span>
+
+        <button class="example-btn" data-latex="y=x^2">Parabola</button>
+        <button class="example-btn" data-latex="y=\sin(x)">Sine</button>
+        <button class="example-btn" data-latex="x^2+y^2=25">Circle</button>
+        <button class="example-btn" data-latex="y&gt;x^2">Inequality</button>
+
+        <span class="toolbar-spacer"></span>
+
+        <button id="intersectionDemoBtn">Intersection demo</button>
+        <button id="resetBtn">Reset view</button>
+        <button id="clearBtn">Clear</button>
+        <button id="downloadBtn" class="primary">Download PNG</button>
+      </div>
+
+      <div id="calculator" aria-label="Interactive graphing calculator"></div>
+
+      <div class="status-row">
+        <span id="status">Waiting for API key…</span>
+        <span>Tip: click gray intersection points to view coordinates.</span>
+      </div>
+    </section>
+
+    <section class="notes">
+      <article>
+        <h2>No key in GitHub</h2>
+        <p>
+          The repository contains only a placeholder workflow. Your personal API
+          key is never committed to the project.
+        </p>
+      </article>
+
+      <article>
+        <h2>Intersection example</h2>
+        <p>
+          Click <strong>Intersection demo</strong> after the calculator loads.
+          It graphs <code>y=x²</code> and <code>y=2x+3</code>.
+        </p>
+      </article>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
