@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="A keyless GitHub demo showing how to load the Desmos Graphing Calculator API at runtime." />
+  <meta name="description" content="Explore Desmos graphs, intersections, inequalities, and PNG export with a user-supplied API key." />
   <title>Desmos Graphing Calculator API Demo</title>
   <link rel="stylesheet" href="style.css" />
 </head>
@@ -21,11 +21,11 @@
     <section id="keyPanel" class="key-card">
       <h2>Enter API key locally</h2>
       <p>
-        Your key is not stored in this repository or sent to this demo server.
-        It is used only by your browser to load the Desmos API.
+        Get a key from <a href="https://www.desmos.com/my-api">Desmos API</a>.
+        This demo does not store it; your browser sends it to Desmos to load the API.
       </p>
 
-      <div class="key-row">
+      <form id="keyForm" class="key-row">
         <input
           id="apiKeyInput"
           type="password"
@@ -33,13 +33,23 @@
           placeholder="Paste your Desmos API key"
           aria-label="Desmos API key"
         />
-        <button id="loadBtn" class="primary">Load calculator</button>
-      </div>
+        <button id="loadBtn" class="primary" type="submit">Load calculator</button>
+      </form>
+      <p id="keyStatus" class="key-status" role="status" aria-live="polite"></p>
+    </section>
+
+    <section class="showcase-guide" aria-label="Quick graphing tour">
+      <h2>Try a one-minute graphing tour</h2>
+      <ol>
+        <li>Load the calculator, then select <strong>Intersection demo</strong>. Click the gray points at (-1, 1) and (3, 9).</li>
+        <li>Select <strong>Clear</strong>, then add <strong>Circle</strong> and <strong>Inequality</strong> to compare graph types.</li>
+        <li>Select <strong>Download PNG</strong> to save the graph you see.</li>
+      </ol>
     </section>
 
     <section id="calculatorCard" class="calculator-card hidden">
       <div class="toolbar">
-        <span class="toolbar-label">Examples:</span>
+        <span class="toolbar-label">Add graphs:</span>
 
         <button class="example-btn" data-latex="y=x^2">Parabola</button>
         <button class="example-btn" data-latex="y=\sin(x)">Sine</button>
@@ -57,7 +67,7 @@
       <div id="calculator" aria-label="Interactive graphing calculator"></div>
 
       <div class="status-row">
-        <span id="status">Waiting for API key…</span>
+        <span id="status" role="status" aria-live="polite">Waiting for API key…</span>
         <span>Tip: click gray intersection points to view coordinates.</span>
       </div>
     </section>
@@ -66,8 +76,8 @@
       <article>
         <h2>No key in GitHub</h2>
         <p>
-          The repository contains only a placeholder workflow. Your personal API
-          key is never committed to the project.
+          The repository contains no personal API key. The key you enter is used
+          in a browser request to Desmos and is cleared from the input after loading.
         </p>
       </article>
 
