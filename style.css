@@ -40,6 +40,7 @@ h1 {
 
 .key-card,
 .calculator-card,
+.showcase-guide,
 .notes article {
   border: 1px solid #d8e5ec;
   border-radius: 18px;
@@ -53,6 +54,7 @@ h1 {
 }
 
 .key-card h2,
+.showcase-guide h2,
 .notes h2 {
   margin: 0 0 8px;
   font-size: 1rem;
@@ -98,6 +100,16 @@ button.primary {
   background: #176b87;
   color: white;
 }
+
+.key-status { margin: 10px 0 0; color: #9b3d28; }
+.key-status:empty { display: none; }
+
+.showcase-guide {
+  padding: 18px 20px;
+  margin-bottom: 18px;
+}
+.showcase-guide ol { margin: 10px 0 0; padding-left: 22px; line-height: 1.6; }
+.showcase-guide li + li { margin-top: 4px; }
 
 .calculator-card {
   overflow: hidden;
