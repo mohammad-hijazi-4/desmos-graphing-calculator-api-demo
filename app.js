@@ -3,6 +3,8 @@
 
   const apiKeyInput = document.getElementById("apiKeyInput");
   const loadBtn = document.getElementById("loadBtn");
+  const keyForm = document.getElementById("keyForm");
+  const keyStatus = document.getElementById("keyStatus");
   const keyPanel = document.getElementById("keyPanel");
   const calculatorCard = document.getElementById("calculatorCard");
   const calculatorEl = document.getElementById("calculator");
@@ -10,11 +12,12 @@
 
   let calculator = null;
 
-  loadBtn.addEventListener("click", () => {
+  keyForm.addEventListener("submit", (event) => {
+    event.preventDefault();
     const apiKey = apiKeyInput.value.trim();
 
     if (!apiKey) {
-      alert("Please enter a Desmos API key.");
+      keyStatus.textContent = "Please enter a Desmos API key.";
       return;
     }
 
@@ -24,6 +27,7 @@
   function loadDesmos(apiKey) {
     loadBtn.disabled = true;
     loadBtn.textContent = "Loading…";
+    keyStatus.textContent = "Loading the Desmos API…";
 
     const script = document.createElement("script");
     script.src =
@@ -34,7 +38,8 @@
     script.onerror = () => {
       loadBtn.disabled = false;
       loadBtn.textContent = "Load calculator";
-      alert("Desmos API could not be loaded.");
+      keyStatus.textContent = "Desmos API could not be loaded. Check your key and connection, then retry.";
+      script.remove();
     };
 
     document.head.appendChild(script);
@@ -47,10 +52,11 @@
     ) {
       loadBtn.disabled = false;
       loadBtn.textContent = "Load calculator";
-      alert("GraphingCalculator is not available for this API key.");
+      keyStatus.textContent = "GraphingCalculator is not available for this API key.";
       return;
     }
 
+    apiKeyInput.value = "";
     calculatorCard.classList.remove("hidden");
     keyPanel.classList.add("hidden");
 
@@ -86,6 +92,7 @@
           id: "example-" + index,
           latex: button.dataset.latex
         });
+        statusEl.textContent = button.textContent + " graph added. Select Clear to start fresh.";
       });
     });
 
@@ -120,6 +127,7 @@
         bottom: -7,
         top: 7
       });
+      statusEl.textContent = "Default view restored; expressions are still on the graph.";
     });
 
     document.getElementById("clearBtn").addEventListener("click", () => {
@@ -143,6 +151,7 @@
           document.body.appendChild(link);
           link.click();
           link.remove();
+          statusEl.textContent = "PNG downloaded.";
         }
       );
     });
